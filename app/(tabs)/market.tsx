@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ScrollView, TextInput, Modal } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { PRODUCTS_MOCK, ProductType, PROVIDERS_MOCK } from '../../data/ecommerce_mock';
+import { ProductType, PROVIDERS_MOCK } from '../../data/ecommerce_mock';
 import { useCart } from '../../context/CartContext';
+import { useCatalog } from '../../context/CatalogContext';
 
 const CATEGORIES = ['Todos', 'Esmaltes', 'Cabinas', 'Maquinaría', 'Descartables'];
 const PROVINCES = [
@@ -22,8 +23,9 @@ export default function MarketScreen() {
   const [isProvinceModalVisible, setProvinceModalVisible] = useState(false);
   
   const { addToCart, cartCount } = useCart();
+  const { products } = useCatalog();
 
-  const filteredProducts = PRODUCTS_MOCK.filter(p => {
+  const filteredProducts = products.filter(p => {
     const matchesCategory = activeCategory === 'Todos' || p.category === activeCategory;
     const matchesType = typeFilter === 'Todos' || p.type === typeFilter;
     

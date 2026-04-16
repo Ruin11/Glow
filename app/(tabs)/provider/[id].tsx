@@ -3,15 +3,17 @@ import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react
 import { MaterialIcons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCart } from '../../../context/CartContext';
-import { PRODUCTS_MOCK, PROVIDERS_MOCK } from '../../../data/ecommerce_mock';
+import { useCatalog } from '../../../context/CatalogContext';
+import { PROVIDERS_MOCK } from '../../../data/ecommerce_mock';
 
 export default function ProviderProfileScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { addToCart } = useCart();
+  const { products } = useCatalog();
 
   const provider = PROVIDERS_MOCK.find(p => p.id === id);
-  const providerProducts = PRODUCTS_MOCK.filter(p => p.vendorId === id);
+  const providerProducts = products.filter(p => p.vendorId === id);
 
   if (!provider) {
     return (

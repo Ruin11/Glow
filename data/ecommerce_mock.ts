@@ -8,6 +8,7 @@ export interface Product {
   type: ProductType;
   vendorId: string;
   image: string;
+  images?: string[];
 }
 
 export interface Provider {

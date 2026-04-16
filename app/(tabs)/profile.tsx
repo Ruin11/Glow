@@ -126,7 +126,7 @@ const ProviderProfile = () => {
         <View style={styles.section}>
            <Text style={styles.sectionTitle}>Gestión Operativa</Text>
            
-           <TouchableOpacity style={styles.providerActionRow}>
+           <TouchableOpacity style={styles.providerActionRow} onPress={() => router.push('/provider-catalog')}>
                <View style={styles.providerActionIconBox}>
                   <MaterialIcons name="inventory" size={24} color="#10B981" />
                </View>
