@@ -1,51 +1,21 @@
-import { Tabs } from 'expo-router';
-import { MaterialIcons } from '@expo/vector-icons';
-import { StyleSheet } from 'react-native';
+import { Stack } from 'expo-router';
+import { RoleProvider } from '../context/RoleContext';
+import { FavoritesProvider } from '../context/FavoritesContext';
+import { CartProvider } from '../context/CartContext';
 
 export default function RootLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: '#000',
-        },
-        headerTintColor: '#fff',
-        tabBarStyle: {
-          backgroundColor: '#000',
-          borderTopColor: '#333',
-        },
-        tabBarActiveTintColor: '#C084FC',
-        tabBarInactiveTintColor: '#888',
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Explorar',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="apps" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="market"
-        options={{
-          title: 'Market',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="shopping-cart" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Perfil',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="person" size={size} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+    <RoleProvider>
+      <FavoritesProvider>
+        <CartProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" />
+          <Stack.Screen name="roles" />
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="edit-profile" options={{ presentation: 'modal' }} />
+        </Stack>
+      </CartProvider>
+    </FavoritesProvider>
+    </RoleProvider>
   );
 }
-
-const styles = StyleSheet.create({});
